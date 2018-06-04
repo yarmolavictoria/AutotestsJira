@@ -27,16 +27,16 @@ public class AutoTest {
         browser.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
     }
 
-    @Test(description = "Login to Jira - Negative scenario", priority = 1)
+    @Test(priority = 1)
     public void loginToJiraNegative  () throws InterruptedException  {
         browser.get(baseURL);
         clearAndFill(By.id("login-form-username"), userName);
         clearAndFill(By.id("login-form-password"), userPass + 1).submit();
         Thread.sleep(5000);
-        Assert.assertTrue(browser.findElement(By.id("usernameerror"))!= null);
+        Assert.assertEquals (browser.findElement(By.id("usernameerror")).getText(), "Sorry, your username and password are incorrect - please try again.");
 
     }
-    @Test(description = "Login to Jira - Positive scenario", priority = 2)
+    @Test( priority = 2)
     public void loginToJiraPositive () {
         browser.get(baseURL);
         clearAndFill(By.id("login-form-username"), userName);
@@ -45,7 +45,7 @@ public class AutoTest {
         Assert.assertEquals(pageData, userName);
     }
 
-    @Test(description = "Create Issue in GQR Project", priority = 3)
+    @Test(priority = 3)
     public void createIssue () throws InterruptedException {
         browser.findElement(By.id("create_link")).click();
         clearAndFill(By.id("project-field"),"General QA Robert (GQR)"+"\n");
@@ -56,7 +56,7 @@ public class AutoTest {
         Assert.assertTrue(successMessage != null);
     }
 
-    @Test(description = "Open Issue", priority = 4)
+    @Test( priority = 4)
     public void openIssue() {
         String link = (browser.findElement(By.className("issue-created-key")).getAttribute("href"));
         browser.get(link);
@@ -66,9 +66,9 @@ public class AutoTest {
 
 
     @AfterTest
-    public void closeChrome() throws InterruptedException {
-        Thread.sleep(10000);
-        browser.quit();
+         public void closeChrome() throws InterruptedException {
+         Thread.sleep(10000);
+         browser.quit();
     }
 
     private static WebElement clearAndFill(By selector, String data) {
