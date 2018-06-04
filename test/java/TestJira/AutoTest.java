@@ -12,7 +12,6 @@ import java.util.concurrent.TimeUnit;
 
 public class AutoTest {
 
-    static Long startTime;
     static WebDriver browser;
     static String baseURL = "http://jira.hillel.it:8080/";
     static String userName = "yarmolavictoria";
@@ -21,7 +20,6 @@ public class AutoTest {
 
     @BeforeTest
     public void openChrome() {
-        startTime = System.currentTimeMillis();
         System.setProperty("webdriver.chrome.driver", "C:/Users/Vika/Downloads/chromedriver_win32/chromedriver.exe");
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized", "--incognito");
